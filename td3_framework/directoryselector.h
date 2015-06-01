@@ -3,7 +3,7 @@
 
 #include <QWidget>
 #include <QDir>
-//class QLineEdit;
+class QLineEdit;
 class DirectorySelector : public QWidget
 {
     Q_OBJECT
