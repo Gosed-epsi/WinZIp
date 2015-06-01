@@ -5,14 +5,15 @@
 
 int main(int argc, char *argv[])
 {
-    run_zipper("/home/ben/Desktop/");
+    //run_zipper("/Users/sinys/Subversion/Winzip");
+    std::cout << "Hello World" << std::endl;
 }
-
+/*
 void run_zipper(const QString &fileZip){
-
+    std::cout << "Bonjour" << std::endl;
 }
 
 
 void run_dezipper(const QString &fileDezip){
 
-}
+}*/
