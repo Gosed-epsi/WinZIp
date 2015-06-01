@@ -7,18 +7,22 @@ FilePool::FilePool(const QString &folder)
     fillFileList(folder_);
 }
 
+/*
 QString FilePool::tryGetFile(){
 
     QString result;
     QMutexLocker locker(&mutex_);
-    //mutex.lock();
+
+    for (QString theFile : files_) {
+        std::cout << theFile.toStdString() << std::endl;
+    }
+
     if (files_.empty() == false){
         result = files_.front();
         files_.pop_front();
     }
-    //mutex.unlock();
     return result;
-}
+}*/
 
 void FilePool::fillFileList(const QString &folder){
 

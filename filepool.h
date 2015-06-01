@@ -8,12 +8,12 @@ class FilePool
 {
 public:
     FilePool(const QString &folder);
-    QString tryGetFile();
+    QList<QString> files_;
+    //QString tryGetFile();
 
 private :
     void fillFileList(const QString &folder);
     QString folder_;
-    QList<QString> files_;
     QMutex mutex_;
 };
 

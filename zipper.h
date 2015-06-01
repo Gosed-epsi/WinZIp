@@ -5,14 +5,8 @@
 
 class Zipper : public QThread
 {
-    Q_OBJECT
 public:
-    explicit Zipper(QObject *parent = 0);
-
-signals:
-
-public slots:
-
+    Zipper(QString &file);
 };
 
 #endif // ZIPPER_H
