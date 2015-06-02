@@ -1,12 +1,17 @@
 #ifndef ZIPPER_H
 #define ZIPPER_H
 
-#include <QThread>
+#include "zippedbuffer.h"
+#include "zippedbufferpool.h"
+#include <QString>
 
-class Zipper : public QThread
+class Zipper
 {
 public:
-    Zipper(QString &file);
+    Zipper(ZippedBufferPool *ZBP);
+    void CompressFile(QString file);
+
+    ZippedBufferPool *_ZBP;
 };
 
 #endif // ZIPPER_H

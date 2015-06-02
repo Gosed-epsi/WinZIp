@@ -1,18 +1,22 @@
 #ifndef WRITER_H
 #define WRITER_H
 
-#include <QThread>
+#include <QString>
+#include "zippedbufferpool.h"
 
-class Writer : public QThread
+class Writer
 {
-    Q_OBJECT
 public:
-    explicit Writer(QObject *parent = 0);
+    Writer(QString directory, QString ecfFileName, ZippedBufferPool pool);
+    void writeCompressedFile();
+    void writeUnCompressedFiles();
 
-signals:
-
-public slots:
-
+private:
+    ZippedBufferPool _poolZippedBuffer;
+    QString _parentDirectory;
+    QString _rootDirectory;
+    QString _rootDirectoryName;
+    QString _ecfFileName;
 };
 
 #endif // WRITER_H

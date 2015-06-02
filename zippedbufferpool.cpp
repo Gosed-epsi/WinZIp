@@ -1,23 +1,27 @@
 #include "zippedbufferpool.h"
-//#include <QPair>
-//#include <zippedbuffer.h>
+#include "zippedbuffer.h"
+#include <QPair>
+
 
 ZippedBufferPool::ZippedBufferPool()
 {
-
 }
 
-void ZippedBufferPool::put(ZippedBuffer &zb)
+void ZippedBufferPool::put(ZippedBuffer *zb)
 {
-
+    _listZippedBuffer.insert(_listZippedBuffer.begin(),zb);
 }
 
-QPair<int, int> ZippedBufferPool::tryGet()
+QPair<bool,ZippedBuffer> ZippedBufferPool::tryGet()
 {
+    bool value = false;
+    ZippedBuffer zippedBuffer;
+    QPair<bool,ZippedBuffer> pair = qMakePair(value,zippedBuffer);
 
+    return pair;
 }
-
 void ZippedBufferPool::done()
 {
-
+    tryGet();
 }
+

@@ -1,20 +1,16 @@
 #include "zippedbuffer.h"
-#include <QString>
-#include <QByteArray>
-#include <QDataStream>
+#include "qdatastream.h"
 
-ZippedBuffer::ZippedBuffer()
-{
-    this->nameFolder = nameFolder;
-    this->byteCompress = byteCompress;
-}
+ZippedBuffer::ZippedBuffer(){}
 
 void ZippedBuffer::write(QDataStream &stream)
 {
-
+   stream << _name;
+   stream << qCompress(_compressedFile);
 }
 
 void ZippedBuffer::read(QDataStream &stream)
 {
-
+    stream.writeBytes(_compressedFile.data(), _compressedFile.size());
 }
+

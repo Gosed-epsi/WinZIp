@@ -1,24 +1,24 @@
 #include "filepool.h"
 
+#include <QDir>
 
-FilePool::FilePool(const QString &folder)
-{
-    folder_ = folder;
-    fillFileList(folder_);
+FilePool::FilePool(const QString &folder){
+    findFileInFolderAndSubfolders(folder);
 }
 
-void FilePool::fillFileList(const QString &folder){
+void FilePool::findFileInFolderAndSubfolders(const QString &folder){
+    QDir dir(folder);
 
-    QDir directory(folder);
-
-    foreach (QFileInfo entry, directory.entryInfoList(QDir::AllEntries | QDir::NoDotAndDotDot)) {
-
-        if(entry.isDir()){
-            fillFileList(entry.absoluteFilePath());
+    foreach (const QFileInfo &entry, dir.entryInfoList(QDir::AllEntries | QDir::NoDotAndDotDot))
+    {
+        if(entry.isDir() == true)
+        {
+            findFileInFolderAndSubfolders(entry.filePath());
         }
-        else if(entry.isFile() == true){
-
-            files_.push_back(entry.absoluteFilePath());
+        else if (entry.isFile() == true)
+        {
+            append(entry.absoluteFilePath());
         }
     }
 }
+

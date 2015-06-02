@@ -30,3 +30,4 @@ HEADERS += \
     zippedbufferpool.h \
     writer.h \
     epsifilecompressor.h
+
