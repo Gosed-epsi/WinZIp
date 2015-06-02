@@ -4,9 +4,10 @@
 #
 #-------------------------------------------------
 
-QT       += core
+QT       += core gui
+QT += concurrent
 
-QT       -= gui
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = WinZip
 CONFIG   += console
@@ -21,7 +22,9 @@ SOURCES += main.cpp \
     zippedbuffer.cpp \
     zippedbufferpool.cpp \
     writer.cpp \
-    epsifilecompressor.cpp
+    epsifilecompressor.cpp \
+    mainwindow.cpp \
+    directoryselector.cpp
 
 HEADERS += \
     filepool.h \
@@ -29,5 +32,8 @@ HEADERS += \
     zippedbuffer.h \
     zippedbufferpool.h \
     writer.h \
-    epsifilecompressor.h
+    epsifilecompressor.h \
+    mainwindow.h \
+    directoryselector.h
 
+FORMS    +=
