@@ -4,6 +4,8 @@
 #include <list>
 #include <filepool.h>
 #include <QTextStream>
+#include <QByteArray>
+#include <QDataStream>
 
 void run_zipper(const QString &fileZip)
 {
@@ -15,7 +17,7 @@ void run_zipper(const QString &fileZip)
         //Création d'un file
         QFile file(pathFile);
         //Definition de l'ouverture (obligatoire sinon pas d'accès)
-        file.open(QIODevice::ReadOnly | QIODevice::Text);
+        file.open(QIODevice::ReadOnly);
         //Recuperation des bytes
         QByteArray bytesFile = file.readAll();
         //Bytes compresser
@@ -23,7 +25,7 @@ void run_zipper(const QString &fileZip)
         //fichier de bytes
         QFile fileCompress("/Users/sinys/EPSI/IA/Clip/test.zip");
         //Ouverture
-        fileCompress.open(QIODevice::WriteOnly | QIODevice::Text);
+        fileCompress.open(QIODevice::WriteOnly);
         //Ecriture
         fileCompress.write(bytesCompress);
         //fermeture du fichier
@@ -39,17 +41,20 @@ void run_dezipper(const QString &fileDezip){
     //fichier de bytes
     QFile fileCompress("/Users/sinys/EPSI/IA/Clip/test.zip");
     //Ouverture
-    fileCompress.open(QIODevice::ReadOnly | QIODevice::Text);
+    fileCompress.open(QIODevice::ReadOnly);
     //Recuperation des bytes
     QByteArray bytesFile = fileCompress.readAll();
     //Bytes decompresser
-    QByteArray bytesCompress = qUncompress(bytesFile);
+    QByteArray uncompressedArray(qUncompress(bytesFile));
+    QByteArray bytesCompress = uncompressedArray;
     //Création d'un file
     QFile file("/Users/sinys/EPSI/IA/Clip/clp.clp");
     //Definition de l'ouverture (obligatoire sinon pas d'accès)
-    file.open(QIODevice::WriteOnly | QIODevice::Text);
+    file.open(QIODevice::WriteOnly);
     //Ecriture
-    file.write(bytesCompress);
+    //file.write(bytesCompress);
+    QDataStream uncompressedStream(&file);
+    uncompressedStream.writeRawData(uncompressedArray.constData(),uncompressedArray.size());
     //fermeture du fichier
     file.close();
     fileCompress.close();
@@ -58,5 +63,6 @@ void run_dezipper(const QString &fileDezip){
 int main(int argc, char *argv[])
 {
     run_zipper("/Users/sinys/EPSI/IA/Clip");
+    run_dezipper("/Users/sinys/EPSI/IA/Clip");
 }
 
