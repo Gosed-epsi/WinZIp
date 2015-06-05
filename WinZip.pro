@@ -1,39 +1,35 @@
 #-------------------------------------------------
 #
-# Project created by QtCreator 2015-04-24T03:13:00
+# Project created by QtCreator 2015-06-05T15:17:37
 #
 #-------------------------------------------------
 
 QT       += core gui
 QT += concurrent
 
+QMAKE_CXXFLAGS += -std=c++0x
+
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = WinZip
-CONFIG   += console
-CONFIG   -= app_bundle
-
 TEMPLATE = app
 
 
-SOURCES += main.cpp \
-    filepool.cpp \
-    zipper.cpp \
-    zippedbuffer.cpp \
-    zippedbufferpool.cpp \
-    writer.cpp \
-    epsifilecompressor.cpp \
-    mainwindow.cpp \
-    directoryselector.cpp
+SOURCES += main.cpp\
+        mainwindow.cpp \
+        directoryselector.cpp \
+        epsifilecompressor.cpp \
+        filepool.cpp \
+        writer.cpp \
+        zippedbuffer.cpp \
+        zippedbufferpool.cpp \
+        zipper.cpp
 
-HEADERS += \
-    filepool.h \
-    zipper.h \
-    zippedbuffer.h \
-    zippedbufferpool.h \
-    writer.h \
-    epsifilecompressor.h \
-    mainwindow.h \
-    directoryselector.h
-
-FORMS    +=
+HEADERS  += mainwindow.h \
+            directoryselector.h \
+            epsifilecompressor.h \
+            filepool.h \
+            writer.h \
+            zippedbuffer.h \
+            zippedbufferpool.h \
+            zipper.h

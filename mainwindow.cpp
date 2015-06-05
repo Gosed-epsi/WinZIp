@@ -1,27 +1,69 @@
-#ifndef DIRECTORYSELECTOR_H
-#define DIRECTORYSELECTOR_H
+#include "mainwindow.h"
+#include "directoryselector.h"
 
-#include <QWidget>
-#include <QDir>
-class QLineEdit;
-class DirectorySelector : public QWidget
+
+#include <QVBoxLayout>
+#include <QPushButton>
+#include <QtConcurrentFilter>
+#include <QtConcurrentMap>
+#include <QFutureWatcher>
+#include <QFile>
+#include <QTextStream>
+#include <QLineEdit>
+#include <QLabel>
+#include <QTextEdit>
+#include <QProgressDialog>
+
+MainWindow::MainWindow(QWidget *parent) :
+    QMainWindow(parent)
 {
-    Q_OBJECT
-public:
-    explicit DirectorySelector(QWidget *parent = 0);
-    const QDir &currentFolder()const;
-signals:
-    void directoryChanged( const QDir &directory );
-public slots:
-    void validateFolder();
+
+    auto window = new QWidget(this);
+    directorySelector_ = new DirectorySelector(window);
+    auto button = new QPushButton("Search", window);
+    toSearch_ = new QLineEdit("double",window);
+    fileSuffix_ = new QLineEdit("c", window);
+    result_ = new QTextEdit(window);
+
+    auto layout = new QVBoxLayout;
+    layout->addWidget(new QLabel("Search string:", window));
+    layout->addWidget(toSearch_);
+
+    layout->addWidget(new QLabel("In folder:", window));
+    layout->addWidget(directorySelector_);
+    layout->addWidget(new QLabel("For files:", window));
+    layout->addWidget( fileSuffix_ );
+    layout->addWidget(result_);
+    layout->addWidget(button);
+
+    connect(button,SIGNAL(clicked()),this, SLOT(process()));
+    connect(directorySelector_,SIGNAL(directoryChanged(QDir)),this,SLOT(directoryChanged(QDir)));
+
+    window->setLayout(layout);
+    setCentralWidget(window);
+    show();
+
+}
+
+MainWindow::~MainWindow()
+{
+}
+
+void MainWindow::process() {
+  QString folder(directorySelector_->currentFolder().absolutePath());
+
+  QString suffix(fileSuffix_->text());
+  QString search(toSearch_->text());
+  result_->clear();
+
+  //
+  // Add your code here...
+  //
+
+}
+
+void MainWindow::directoryChanged(const QDir &/*dir*/) {
+
+}
 
 
-private slots:
-    void selectFolder();
-
-private:
-    QLineEdit *folder_;
-    QDir currentFolder_;
-};
-
-#endif // DIRECTORYSELECTOR_H
