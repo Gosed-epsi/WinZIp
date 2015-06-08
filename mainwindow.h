@@ -3,7 +3,8 @@
 
 #include <QMainWindow>
 #include <QFuture>
-#include <QLabel>
+#include <QPushButton>
+#include <QLineEdit>
 #include <epsifilecompressor.h>
 class QTextEdit;
 class QLineEdit;
@@ -32,8 +33,11 @@ private:
     QLineEdit *fileSuffix_;
     QRadioButton *unixButton_;
     QRadioButton *windowsButton_;
+    QPushButton *buttonCompress;
+    QPushButton *buttonUncompress;
+    QLineEdit *nameFile;
 
-    EpsiFileCompressor *epsiFileCompressor = new EpsiFileCompressor();
+    EpsiFileCompressor *epsiFileCompressor;
 
 };
 

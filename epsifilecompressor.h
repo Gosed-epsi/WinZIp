@@ -8,8 +8,8 @@ class EpsiFileCompressor
 {
 public:
     EpsiFileCompressor();
-    void uncompress(const QString &ecfFileName, const QString &folder );
-    void compress(const QString &folder, const QString &ecfFileName);
+    void uncompress(QString &ecfFileName, QString &folder );
+    void compress(QString &folder, QString &ecfFileName);
 };
 
 #endif // EPSIFILECOMPRESSOR_H

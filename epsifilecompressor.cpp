@@ -11,7 +11,7 @@ EpsiFileCompressor::EpsiFileCompressor()
 {
 }
 
-void EpsiFileCompressor::uncompress(const QString &ecfFileName, const QString &folder )
+void EpsiFileCompressor::uncompress(QString &ecfFileName, QString &folder )
 {
     //QString pathCompressFile = folder + "/" + ecfFileName + ".ecf";
     ZippedBufferPool zippedBufferPool;
@@ -20,7 +20,7 @@ void EpsiFileCompressor::uncompress(const QString &ecfFileName, const QString &f
 
 }
 
-void EpsiFileCompressor::compress(const QString &folder, const QString &ecfFileName)
+void EpsiFileCompressor::compress(QString &folder, QString &ecfFileName)
 {
     QStringList *filePool = new FilePool(folder);
     ZippedBufferPool *zippedBufferPool = new ZippedBufferPool();

@@ -21,15 +21,19 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent)
 {
 
+    epsiFileCompressor = new EpsiFileCompressor();
+
     auto window = new QWidget(this);
     directorySelector_ = new DirectorySelector(window);
     unixButton_ = new QRadioButton(window);
     windowsButton_ = new QRadioButton(window);
-    auto buttonCompress = new QPushButton("Compresser", window);
-    auto buttonUncompress = new QPushButton("Décompresser", window);
+    buttonCompress = new QPushButton("Compresser", window);
+    buttonUncompress = new QPushButton("Décompresser", window);
+    nameFile = new QLineEdit("",window);
 
     auto layout = new QVBoxLayout;
 
+    layout->addWidget(nameFile);
     layout->addWidget(new QLabel("In folder:", window));
     layout->addWidget(directorySelector_);
     layout->addWidget(new QLabel("Unix:", window));
@@ -53,13 +57,11 @@ MainWindow::~MainWindow()
 }
 
 void MainWindow::compress() {
+
     QString folder(directorySelector_->currentFolder().absolutePath());
+    QString name(nameFile->text());
 
-    QString suffix(fileSuffix_->text());
-    QString search(toSearch_->text());
-    result_->clear();
-
-    epsiFileCompressor->compress("C:/Users/Public/Pictures","COMPRESS");
+    epsiFileCompressor->compress(folder,name);
 }
 
 void MainWindow::uncompress() {
