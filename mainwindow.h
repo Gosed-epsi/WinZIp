@@ -3,11 +3,14 @@
 
 #include <QMainWindow>
 #include <QFuture>
+#include <QLabel>
+#include <epsifilecompressor.h>
 class QTextEdit;
 class QLineEdit;
 class QDir;
 class QProgressBar;
 class DirectorySelector;
+class QRadioButton;
 
 class MainWindow : public QMainWindow
 {
@@ -18,7 +21,8 @@ public:
     ~MainWindow();
 
 public slots:
-    void process();
+    void uncompress();
+    void compress();
     void directoryChanged(const QDir &dir);
 
 private:
@@ -26,6 +30,10 @@ private:
     QTextEdit *result_;
     QLineEdit *toSearch_;
     QLineEdit *fileSuffix_;
+    QRadioButton *unixButton_;
+    QRadioButton *windowsButton_;
+
+    EpsiFileCompressor *epsiFileCompressor = new EpsiFileCompressor();
 
 };
 

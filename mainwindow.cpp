@@ -4,6 +4,7 @@
 
 #include <QVBoxLayout>
 #include <QPushButton>
+#include <QRadioButton>
 #include <QtConcurrentFilter>
 #include <QtConcurrentMap>
 #include <QFutureWatcher>
@@ -13,6 +14,8 @@
 #include <QLabel>
 #include <QTextEdit>
 #include <QProgressDialog>
+#include <QObject>
+#include <QLabel>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent)
@@ -20,23 +23,23 @@ MainWindow::MainWindow(QWidget *parent) :
 
     auto window = new QWidget(this);
     directorySelector_ = new DirectorySelector(window);
-    auto button = new QPushButton("Search", window);
-    toSearch_ = new QLineEdit("double",window);
-    fileSuffix_ = new QLineEdit("c", window);
-    result_ = new QTextEdit(window);
+    unixButton_ = new QRadioButton(window);
+    windowsButton_ = new QRadioButton(window);
+    auto buttonCompress = new QPushButton("Compresser", window);
+    auto buttonUncompress = new QPushButton("Décompresser", window);
 
     auto layout = new QVBoxLayout;
-    layout->addWidget(new QLabel("Search string:", window));
-    layout->addWidget(toSearch_);
 
     layout->addWidget(new QLabel("In folder:", window));
     layout->addWidget(directorySelector_);
-    layout->addWidget(new QLabel("For files:", window));
-    layout->addWidget( fileSuffix_ );
-    layout->addWidget(result_);
-    layout->addWidget(button);
+    layout->addWidget(new QLabel("Unix:", window));
+    layout->addWidget(unixButton_);
+    layout->addWidget(new QLabel("Windows:", window));
+    layout->addWidget(windowsButton_);
+    layout->addWidget(buttonCompress);
+    layout->addWidget(buttonUncompress);
 
-    connect(button,SIGNAL(clicked()),this, SLOT(process()));
+    QObject::connect(buttonCompress,SIGNAL(released()),this, SLOT(compress()));
     connect(directorySelector_,SIGNAL(directoryChanged(QDir)),this,SLOT(directoryChanged(QDir)));
 
     window->setLayout(layout);
@@ -49,16 +52,26 @@ MainWindow::~MainWindow()
 {
 }
 
-void MainWindow::process() {
-  QString folder(directorySelector_->currentFolder().absolutePath());
+void MainWindow::compress() {
+    QString folder(directorySelector_->currentFolder().absolutePath());
 
-  QString suffix(fileSuffix_->text());
-  QString search(toSearch_->text());
-  result_->clear();
+    QString suffix(fileSuffix_->text());
+    QString search(toSearch_->text());
+    result_->clear();
 
-  //
-  // Add your code here...
-  //
+    epsiFileCompressor->compress("C:/Users/Public/Pictures","COMPRESS");
+}
+
+void MainWindow::uncompress() {
+    QString folder(directorySelector_->currentFolder().absolutePath());
+
+    QString suffix(fileSuffix_->text());
+    QString search(toSearch_->text());
+    result_->clear();
+
+    QString slash;
+    if (unixButton_->isChecked()) slash = "/";
+    if (windowsButton_->isChecked()) slash = "\\";
 
 }
 

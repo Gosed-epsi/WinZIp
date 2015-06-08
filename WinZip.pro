@@ -33,3 +33,5 @@ HEADERS  += mainwindow.h \
             zippedbuffer.h \
             zippedbufferpool.h \
             zipper.h
+
+FORMS +=
