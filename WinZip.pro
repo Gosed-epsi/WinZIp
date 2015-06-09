@@ -35,3 +35,5 @@ HEADERS  += mainwindow.h \
             zipper.h
 
 FORMS +=
+
+DISTFILES +=

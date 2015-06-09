@@ -16,37 +16,54 @@
 #include <QProgressDialog>
 #include <QObject>
 #include <QLabel>
+#include <QTabWidget>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent)
 {
 
-    epsiFileCompressor = new EpsiFileCompressor();
+    epsiFileCompressor_ = new EpsiFileCompressor();
 
     auto window = new QWidget(this);
+    onglets_ = new QTabWidget(window);
+    onglets_->setGeometry(30, 20, 250, 220);
+
+    auto windowCompress = new QWidget;
+    auto windowUncompress = new QWidget;
+
+    nameFile_ = new QLineEdit("",window);
     directorySelector_ = new DirectorySelector(window);
+    buttonCompress_ = new QPushButton("Compresser", window);
+
     unixButton_ = new QRadioButton(window);
+    unixButton_->setText("Unix");
     windowsButton_ = new QRadioButton(window);
-    buttonCompress = new QPushButton("Compresser", window);
-    buttonUncompress = new QPushButton("Décompresser", window);
-    nameFile = new QLineEdit("",window);
+    windowsButton_->setText("Windows");
+    buttonUncompress_ = new QPushButton("Décompresser", window);
 
-    auto layout = new QVBoxLayout;
+    auto layoutCompress = new QVBoxLayout;
+    auto layoutUncompress = new QVBoxLayout;
 
-    layout->addWidget(nameFile);
-    layout->addWidget(new QLabel("In folder:", window));
-    layout->addWidget(directorySelector_);
-    layout->addWidget(new QLabel("Unix:", window));
-    layout->addWidget(unixButton_);
-    layout->addWidget(new QLabel("Windows:", window));
-    layout->addWidget(windowsButton_);
-    layout->addWidget(buttonCompress);
-    layout->addWidget(buttonUncompress);
+    layoutCompress->addWidget(new QLabel("Nom de l'archive :", window));
+    layoutCompress->addWidget(nameFile_);
+    layoutCompress->addWidget(new QLabel("Répertoire :", window));
+    layoutCompress->addWidget(directorySelector_);
+    layoutCompress->addWidget(buttonCompress_);
 
-    QObject::connect(buttonCompress,SIGNAL(released()),this, SLOT(compress()));
+    layoutUncompress->addWidget(unixButton_);
+    layoutUncompress->addWidget(windowsButton_);
+    layoutUncompress->addWidget(buttonUncompress_);
+
+    QObject::connect(buttonCompress_,SIGNAL(released()),this, SLOT(compress()));
     connect(directorySelector_,SIGNAL(directoryChanged(QDir)),this,SLOT(directoryChanged(QDir)));
 
-    window->setLayout(layout);
+    windowCompress->setLayout(layoutCompress);
+    windowUncompress->setLayout(layoutUncompress);
+
+    onglets_->addTab(windowCompress, "Compression");
+    onglets_->addTab(windowUncompress, "Décompression");
+
+    setGeometry(300,200,300,260);
     setCentralWidget(window);
     show();
 
@@ -59,17 +76,12 @@ MainWindow::~MainWindow()
 void MainWindow::compress() {
 
     QString folder(directorySelector_->currentFolder().absolutePath());
-    QString name(nameFile->text());
+    QString name(nameFile_->text());
 
-    epsiFileCompressor->compress(folder,name);
+    epsiFileCompressor_->compress(folder,name);
 }
 
 void MainWindow::uncompress() {
-    QString folder(directorySelector_->currentFolder().absolutePath());
-
-    QString suffix(fileSuffix_->text());
-    QString search(toSearch_->text());
-    result_->clear();
 
     QString slash;
     if (unixButton_->isChecked()) slash = "/";

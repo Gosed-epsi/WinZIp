@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QFuture>
+#include <QTabWidget>
 #include <QPushButton>
 #include <QLineEdit>
 #include <epsifilecompressor.h>
@@ -27,17 +28,18 @@ public slots:
     void directoryChanged(const QDir &dir);
 
 private:
+    QTabWidget *onglets_;
     DirectorySelector *directorySelector_;
     QTextEdit *result_;
     QLineEdit *toSearch_;
     QLineEdit *fileSuffix_;
     QRadioButton *unixButton_;
     QRadioButton *windowsButton_;
-    QPushButton *buttonCompress;
-    QPushButton *buttonUncompress;
-    QLineEdit *nameFile;
+    QPushButton *buttonCompress_;
+    QPushButton *buttonUncompress_;
+    QLineEdit *nameFile_;
 
-    EpsiFileCompressor *epsiFileCompressor;
+    EpsiFileCompressor *epsiFileCompressor_;
 
 };
 
