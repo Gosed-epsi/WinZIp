@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "directoryselector.h"
+#include "fileselector.h"
 
 
 #include <QVBoxLayout>
@@ -35,6 +36,8 @@ MainWindow::MainWindow(QWidget *parent) :
     directorySelector_ = new DirectorySelector(window);
     buttonCompress_ = new QPushButton("Compresser", window);
 
+
+    fileSelector_ = new FileSelector(window);
     unixButton_ = new QRadioButton(window);
     unixButton_->setText("Unix");
     windowsButton_ = new QRadioButton(window);
@@ -50,12 +53,16 @@ MainWindow::MainWindow(QWidget *parent) :
     layoutCompress->addWidget(directorySelector_);
     layoutCompress->addWidget(buttonCompress_);
 
+    layoutUncompress->addWidget(fileSelector_);
     layoutUncompress->addWidget(unixButton_);
     layoutUncompress->addWidget(windowsButton_);
     layoutUncompress->addWidget(buttonUncompress_);
 
     QObject::connect(buttonCompress_,SIGNAL(released()),this, SLOT(compress()));
     connect(directorySelector_,SIGNAL(directoryChanged(QDir)),this,SLOT(directoryChanged(QDir)));
+
+    QObject::connect(buttonUncompress_,SIGNAL(released()),this, SLOT(uncompress()));
+    connect(fileSelector_,SIGNAL(directoryChanged(QDir)),this,SLOT(directoryChanged(QDir)));
 
     windowCompress->setLayout(layoutCompress);
     windowUncompress->setLayout(layoutUncompress);

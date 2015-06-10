@@ -12,6 +12,7 @@ class QLineEdit;
 class QDir;
 class QProgressBar;
 class DirectorySelector;
+class FileSelector;
 class QRadioButton;
 
 class MainWindow : public QMainWindow
@@ -30,6 +31,7 @@ public slots:
 private:
     QTabWidget *onglets_;
     DirectorySelector *directorySelector_;
+    FileSelector *fileSelector_;
     QTextEdit *result_;
     QLineEdit *toSearch_;
     QLineEdit *fileSuffix_;

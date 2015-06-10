@@ -23,7 +23,8 @@ SOURCES += main.cpp\
         writer.cpp \
         zippedbuffer.cpp \
         zippedbufferpool.cpp \
-        zipper.cpp
+        zipper.cpp \
+    fileselector.cpp
 
 HEADERS  += mainwindow.h \
             directoryselector.h \
@@ -32,7 +33,8 @@ HEADERS  += mainwindow.h \
             writer.h \
             zippedbuffer.h \
             zippedbufferpool.h \
-            zipper.h
+            zipper.h \
+    fileselector.h
 
 FORMS +=
 
