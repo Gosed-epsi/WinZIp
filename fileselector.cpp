@@ -11,6 +11,7 @@ FileSelector::FileSelector(QWidget *parent) :
 {
     auto button = new QPushButton("...", this);
     folder_ = new QLineEdit(currentFolder().absolutePath(), this);
+    folder_->setEnabled(false);
     auto layout = new QHBoxLayout;
     layout->addWidget(folder_);
     layout->addWidget(button);
@@ -26,9 +27,8 @@ void FileSelector::selectFolder() {
 
     dialog.setFileMode(QFileDialog::ExistingFiles);
     dialog.setOption(QFileDialog::ShowDirsOnly);
-    dialog.setDirectory(currentFolder());
     if( dialog.exec() == QFileDialog::Accepted ) {
-        folder_->setText(dialog.directory().absolutePath());
+        folder_->setText(dialog.selectedFiles().first());
         currentFolder_ = dialog.directory();
         emit directoryChanged( currentFolder_ );
     }
