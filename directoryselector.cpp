@@ -11,6 +11,7 @@ DirectorySelector::DirectorySelector(QWidget *parent) :
 {
     auto button = new QPushButton("...", this);
     folder_ = new QLineEdit(currentFolder().absolutePath(), this);
+    folder_->setEnabled(false);
     auto layout = new QHBoxLayout;
     layout->addWidget(folder_);
     layout->addWidget(button);

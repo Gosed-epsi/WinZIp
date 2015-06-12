@@ -11,6 +11,7 @@ class FileSelector : public QWidget
 public:
     explicit FileSelector(QWidget *parent = 0);
     const QDir &currentFolder()const;
+    const QString &currentFile()const;
 signals:
     void directoryChanged( const QDir &directory );
 public slots:
@@ -21,8 +22,9 @@ private slots:
     void selectFolder();
 
 private:
-    QLineEdit *folder_;
+    QLineEdit *path_;
     QDir currentFolder_;
+    QString currentFile_;
 };
 
 #endif // DIRECTORYSELECTOR_H

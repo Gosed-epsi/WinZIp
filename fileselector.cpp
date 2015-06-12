@@ -10,14 +10,14 @@ FileSelector::FileSelector(QWidget *parent) :
     QWidget(parent),currentFolder_("c:\\")
 {
     auto button = new QPushButton("...", this);
-    folder_ = new QLineEdit(currentFolder().absolutePath(), this);
-    folder_->setEnabled(false);
+    path_ = new QLineEdit(currentFolder().absolutePath(), this);
+    path_->setEnabled(false);
     auto layout = new QHBoxLayout;
-    layout->addWidget(folder_);
+    layout->addWidget(path_);
     layout->addWidget(button);
 
     connect(button, SIGNAL(clicked()),this, SLOT(selectFolder()));
-    connect(folder_,SIGNAL(editingFinished()),this, SLOT(validateFolder()));
+    connect(path_,SIGNAL(editingFinished()),this, SLOT(validateFolder()));
 
     setLayout(layout);
 }
@@ -28,17 +28,17 @@ void FileSelector::selectFolder() {
     dialog.setFileMode(QFileDialog::ExistingFiles);
     dialog.setOption(QFileDialog::ShowDirsOnly);
     if( dialog.exec() == QFileDialog::Accepted ) {
-        folder_->setText(dialog.selectedFiles().first());
+        path_->setText(dialog.selectedFiles().first());
         currentFolder_ = dialog.directory();
         emit directoryChanged( currentFolder_ );
     }
 
 }
 void FileSelector::validateFolder() {
-    QDir newDir( folder_->text());
+    QDir newDir( path_->text());
     if( newDir.exists() == false) {
-        QMessageBox::critical(this, "Invalid folder",QString("%1 is not a valid folder").arg(folder_->text()),QMessageBox::Ok);
-        folder_->setText(currentFolder_.absolutePath());
+        QMessageBox::critical(this, "Invalid folder",QString("%1 is not a valid folder").arg(path_->text()),QMessageBox::Ok);
+        path_->setText(currentFolder_.absolutePath());
     }
     else {
         currentFolder_ = newDir;
@@ -47,4 +47,7 @@ void FileSelector::validateFolder() {
 }
 const QDir &FileSelector::currentFolder()const {
     return currentFolder_;
+}
+const QString &FileSelector::currentFile()const {
+    return currentFile_;
 }
