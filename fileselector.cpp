@@ -30,7 +30,7 @@ void FileSelector::selectFolder() {
     dialog.setNameFilter("Epsi Compressed Format (*.ecf)");
     if( dialog.exec() == QFileDialog::Accepted ) {
         path_->setText(dialog.selectedFiles().first());
-       // currentFile_(dialog.selectedFiles().first().);
+        currentFile_ = dialog.selectedFiles().first();
         currentFolder_ = dialog.directory();
         emit directoryChanged( currentFolder_ );
     }

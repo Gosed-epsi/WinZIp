@@ -94,6 +94,11 @@ void MainWindow::uncompress() {
     if (unixButton_->isChecked()) slash = "/";
     if (windowsButton_->isChecked()) slash = "\\";
 
+    QString folder(fileSelector_->currentFolder().absolutePath());
+    QString file(fileSelector_->currentFile());
+
+    epsiFileCompressor_->uncompress(file,folder);
+
 }
 
 void MainWindow::directoryChanged(const QDir &/*dir*/) {
