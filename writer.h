@@ -10,6 +10,7 @@ public:
     Writer(QString directory, QString ecfFileName, ZippedBufferPool pool);
     void writeCompressedFile();
     void writeUnCompressedFiles();
+    QString createDirectory(QString directoryParent,QString directoryToCreate);
 
 private:
     ZippedBufferPool _poolZippedBuffer;

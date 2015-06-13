@@ -1,5 +1,6 @@
 #include "zippedbuffer.h"
 #include "qdatastream.h"
+#include <iostream>
 
 ZippedBuffer::ZippedBuffer(){}
 
@@ -11,6 +12,7 @@ void ZippedBuffer::write(QDataStream &stream)
 
 void ZippedBuffer::read(QDataStream &stream)
 {
-    stream.writeBytes(_compressedFile.data(), _compressedFile.size());
+    stream >> _name >> _compressedFile ;
+    //stream >> _compressedFile;
 }
 

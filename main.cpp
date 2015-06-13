@@ -3,13 +3,15 @@
 
 int main(int argc, char *argv[])
 {
-    //EpsiFileCompressor *epsiFileCompressor = new EpsiFileCompressor();
+    EpsiFileCompressor *epsiFileCompressor = new EpsiFileCompressor();
+    QString name = "/Users/sinys/sans_titre/Test.ecf";
+    QString nameTwo = "/Users/sinys/sans_titre";
     //epsiFileCompressor->compress("C:/Users/Public/Pictures","COMPRESS");
-    //epsiFileCompressor->uncompress("/Users/sinys/EPSI/IA/Compress.ecf", "/Users/sinys/EPSI/IA");
+    epsiFileCompressor->uncompress(name, nameTwo);
 
-    QApplication a(argc, argv);
-    MainWindow w;
-    w.show();
+    //QApplication a(argc, argv);
+    //MainWindow w;
+    //w.show();
 
-    return a.exec();
+    //return a.exec();
 }

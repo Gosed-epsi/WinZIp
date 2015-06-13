@@ -7,16 +7,36 @@
 
 #include "qstringlist.h"
 
-EpsiFileCompressor::EpsiFileCompressor()
-{
-}
+EpsiFileCompressor::EpsiFileCompressor(){}
 
 void EpsiFileCompressor::uncompress(QString &ecfFileName, QString &folder )
 {
-    //QString pathCompressFile = folder + "/" + ecfFileName + ".ecf";
-    ZippedBufferPool zippedBufferPool;
-    Writer *write = new Writer(folder, ecfFileName, zippedBufferPool);
+    QFile fileUncompressed(ecfFileName);
+
+    if(fileUncompressed.exists()  == false)
+    {
+        std::cout << "Le fichier n'hexiste pas!" << std::endl;
+    }
+
+    fileUncompressed.open(QIODevice::ReadOnly);
+
+    QDataStream dataStreamUncompress(&fileUncompressed);
+
+    ZippedBufferPool* zippedBufferPool = new ZippedBufferPool();
+
+    while (dataStreamUncompress.atEnd() == false)
+    {
+        ZippedBuffer* zippedBuffer = new ZippedBuffer();
+        zippedBuffer->read(dataStreamUncompress);
+
+        zippedBufferPool->put(zippedBuffer);
+
+    }
+
+    Writer* write = new Writer(folder, ecfFileName, *zippedBufferPool);
     write->writeUnCompressedFiles();
+
+    fileUncompressed.close();
 
 }
 
