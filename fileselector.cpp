@@ -7,7 +7,7 @@
 #include <QDir>
 
 FileSelector::FileSelector(QWidget *parent) :
-    QWidget(parent),currentFolder_("c:\\")
+    QWidget(parent),currentFolder_("")
 {
     auto button = new QPushButton("...", this);
     path_ = new QLineEdit(currentFolder().absolutePath(), this);
@@ -26,8 +26,8 @@ void FileSelector::selectFolder() {
     QFileDialog dialog;
 
     dialog.setFileMode(QFileDialog::ExistingFiles);
-    dialog.setOption(QFileDialog::ShowDirsOnly);
-    dialog.setNameFilter("Epsi Compressed Format (*.ecf)");
+    //dialog.setOption(QFileDialog::ShowDirsOnly); //NE FONCTIONNE PAS SOUS LE MAC
+    dialog.setNameFilter(tr("All files except (*.ecf)"));
     if( dialog.exec() == QFileDialog::Accepted ) {
         path_->setText(dialog.selectedFiles().first());
         currentFile_ = dialog.selectedFiles().first();
