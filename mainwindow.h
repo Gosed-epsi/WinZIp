@@ -14,6 +14,7 @@ class QProgressBar;
 class DirectorySelector;
 class FileSelector;
 class QRadioButton;
+class QProgressBar;
 
 class MainWindow : public QMainWindow
 {
@@ -39,6 +40,8 @@ private:
     QRadioButton *windowsButton_;
     QPushButton *buttonCompress_;
     QPushButton *buttonUncompress_;
+    QProgressBar *progressCompress_;
+    QProgressBar *progressUncompress_;
     QLineEdit *nameFile_;
 
     EpsiFileCompressor *epsiFileCompressor_;
