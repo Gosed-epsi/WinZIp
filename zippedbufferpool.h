@@ -1,8 +1,8 @@
 #ifndef ZIPPEDBUFFERPOOL_H
 #define ZIPPEDBUFFERPOOL_H
-
 #include "zippedbuffer.h"
 #include <QPair>
+
 class ZippedBufferPool
 {
 public:

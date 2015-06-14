@@ -1,6 +1,5 @@
 #ifndef DIRECTORYSELECTOR_H
 #define DIRECTORYSELECTOR_H
-
 #include <QWidget>
 #include <QDir>
 class QLineEdit;

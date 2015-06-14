@@ -3,9 +3,7 @@
 #include <QPair>
 
 
-ZippedBufferPool::ZippedBufferPool()
-{
-}
+ZippedBufferPool::ZippedBufferPool(){}
 
 void ZippedBufferPool::put(ZippedBuffer *zb)
 {
@@ -17,7 +15,6 @@ QPair<bool,ZippedBuffer> ZippedBufferPool::tryGet()
     bool value = false;
     ZippedBuffer zippedBuffer;
     QPair<bool,ZippedBuffer> pair = qMakePair(value,zippedBuffer);
-
     return pair;
 }
 void ZippedBufferPool::done()

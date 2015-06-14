@@ -1,7 +1,6 @@
 #ifndef ZIPPEDBUFFER_H
 #define ZIPPEDBUFFER_H
-
-#include "qdatastream.h"
+#include <QDataStream>
 
 class ZippedBuffer
 {

@@ -1,12 +1,12 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
-
 #include <QMainWindow>
 #include <QFuture>
 #include <QTabWidget>
 #include <QPushButton>
 #include <QLineEdit>
 #include <epsifilecompressor.h>
+
 class QTextEdit;
 class QLineEdit;
 class QDir;

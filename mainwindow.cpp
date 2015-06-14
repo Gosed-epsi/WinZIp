@@ -1,8 +1,6 @@
 #include "mainwindow.h"
 #include "directoryselector.h"
 #include "fileselector.h"
-
-
 #include <QVBoxLayout>
 #include <QPushButton>
 #include <QRadioButton>

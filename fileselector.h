@@ -1,9 +1,8 @@
 #ifndef FILESELECTOR_H
 #define FILESELECTOR_H
-
-
 #include <QWidget>
 #include <QDir>
+
 class QLineEdit;
 class FileSelector : public QWidget
 {

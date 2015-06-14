@@ -1,6 +1,5 @@
 #ifndef FILEPOOL_H
 #define FILEPOOL_H
-
 #include <QString>
 #include <QStringList>
 #include <iostream>
