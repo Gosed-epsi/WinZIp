@@ -3,8 +3,9 @@
 #include "zippedbuffer.h"
 #include "zippedbufferpool.h"
 #include <QString>
+#include <QThread>
 
-class Zipper
+class Zipper : public QThread
 {
 public:
     Zipper(ZippedBufferPool* ZBP,QString rootDirectory);

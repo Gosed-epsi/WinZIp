@@ -4,6 +4,7 @@
 #include "filepool.h"
 #include <QDataStream>
 #include <QFile>
+#include <QThread>
 
 using namespace std;
 
@@ -28,6 +29,8 @@ void Zipper::CompressFile(QString filePath)
     if((fileSplitSize - rootSplitSize)>1){
         for(int i= rootSplitSize;i<fileSplitSize;i++)
         {
+            this->start();
+            this->wait();
             if(i < fileSplitSize-1)
                 fileName += resultat[i] +"/";
             else
